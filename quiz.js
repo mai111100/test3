@@ -2,147 +2,115 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayQuiz() {
         const questions = [
             {
-                question: "I have been more:",
-                choices: ["Focused on goals and success", "Supportive of others and helpful"],
+                question: "When faced with confrontations, I tend to:",
+                choices: ["Take it head-on", "Avoid it"],
                 weights: [
-                    { achieverScore: +1, helperScore: 0 },
-                    { helperScore: +1, achieverScore: 0 }
+                    { challengerScore: 1, peacemakerScore: 0 },
+                    { challengerScore: 0, peacemakerScore: 1 }
                 ]
             },
             {
-                question: "In stressful situations, I:",
-                choices: ["Seek control and authority", "Avoid conflict and maintain peace"],
+                question: "In social situations, I'm usually:",
+                choices: ["Diplomatic, charming, and ambitious", "Direct, formal, and idealistic"],
                 weights: [
-                    { challengerScore: +1, peacemakerScore: 0 },
-                    { peacemakerScore: +1, challengerScore: 0 }
+                    { achieverScore: 1, reformerScore: 0 },
+                    { achieverScore: 0, reformerScore: 1 }
                 ]
             },
             {
-                question: "I prefer to:",
-                choices: ["Be practical and down-to-earth", "Be imaginative and think creatively"],
+                question: "I prefer plans that are:",
+                choices: ["Detailed and focused", "Spontaneous and fun"],
                 weights: [
-                    { reformerScore: +1, individualistScore: 0 },
-                    { individualistScore: +1, reformerScore: 0 }
+                    { investigatorScore: 1, enthusiastScore: 0 },
+                    { investigatorScore: 0, enthusiastScore: 1 }
                 ]
             },
             {
-                question: "When it comes to my emotions:",
-                choices: ["I try to control or suppress them", "I feel the need to express them"],
+                question: "With new people, I'm:",
+                choices: ["Welcoming and friendly", "Private and reserved"],
                 weights: [
-                    { challengerScore: +1, individualistScore: 0 },
-                    { individualistScore: +1, challengerScore: 0 }
+                    { helperScore: 1, individualistScore: 0 },
+                    { helperScore: 0, individualistScore: 1 }
                 ]
             },
             {
-                question: "In my relationships, I tend to:",
-                choices: ["Be independent and self-sufficient", "Be caring and empathetic"],
+                question: "When something annoys me, I:",
+                choices: ["Get irritated", "Stay calm and ignore it"],
                 weights: [
-                    { investigatorScore: +1, helperScore: 0 },
-                    { helperScore: +1, investigatorScore: 0 }
+                    { loyalistScore: 1, peacemakerScore: 0 },
+                    { loyalistScore: 0, peacemakerScore: 1 }
                 ]
             },
             {
-                question: "I value:",
-                choices: ["Stability and security", "Adventure and spontaneity"],
+                question: "I am more of a:",
+                choices: ["Street-smart survivor", "Idealist thinker"],
                 weights: [
-                    { loyalistScore: +1, enthusiastScore: 0 },
-                    { enthusiastScore: +1, loyalistScore: 0 }
+                    { challengerScore: 1, reformerScore: 0 },
+                    { challengerScore: 0, reformerScore: 1 }
                 ]
             },
             {
-                question: "I fear:",
-                choices: ["Being unloved or unwanted", "Being incompetent or incapable"],
+                question: "In relationships, I tend to:",
+                choices: ["Show affection openly and easily", "Keep a bit of distance"],
                 weights: [
-                    { helperScore: +1, reformerScore: 0 },
-                    { reformerScore: +1, helperScore: 0 }
+                    { helperScore: 1, investigatorScore: 0 },
+                    { helperScore: 0, investigatorScore: 1 }
                 ]
             },
             {
-                question: "I tend to:",
-                choices: ["Make decisions logically", "Follow my feelings"],
+                question: "When trying new things, I:",
+                choices: ["Think about how useful it will be", "Wonder if it will be fun"],
                 weights: [
-                    { investigatorScore: +1, individualistScore: 0 },
-                    { individualistScore: +1, investigatorScore: 0 }
+                    { achieverScore: 1, enthusiastScore: 0 },
+                    { achieverScore: 0, enthusiastScore: 1 }
                 ]
             },
             {
-                question: "At work, I:",
-                choices: ["Focus on task completion and organization", "Prefer creativity and flexibility"],
+                question: "People depend on me for:",
+                choices: ["My insight and knowledge", "My strength and decisiveness"],
                 weights: [
-                    { reformerScore: +1, enthusiastScore: 0 },
-                    { enthusiastScore: +1, reformerScore: 0 }
+                    { investigatorScore: 1, challengerScore: 0 },
+                    { investigatorScore: 0, challengerScore: 1 }
                 ]
             },
             {
-                question: "My main motivation is:",
-                choices: ["To be successful and admired", "To feel secure and at peace"],
+                question: "People see me as:",
+                choices: ["Often unsure of myself", "Often sure of myself"],
                 weights: [
-                    { achieverScore: +1, peacemakerScore: 0 },
-                    { peacemakerScore: +1, achieverScore: 0 }
+                    { loyalistScore: 1, reformerScore: 0 },
+                    { loyalistScore: 0, reformerScore: 1 }
                 ]
             },
             {
-                question: "In social settings, I:",
-                choices: ["Blend in and go with the flow", "Stand out and take charge"],
+                question: "When I have to speak up, I:",
+                choices: ["Find it hard to speak for myself", "Am usually outspoken and dare to say what others don't"],
                 weights: [
-                    { peacemakerScore: +1, challengerScore: 0 },
-                    { challengerScore: +1, peacemakerScore: 0 }
+                    { individualistScore: 1, enthusiastScore: 0 },
+                    { individualistScore: 0, enthusiastScore: 1 }
                 ]
             },
             {
-                question: "I am usually:",
-                choices: ["Realistic and pragmatic", "Optimistic and forward-thinking"],
+                question: "In stressful situations, I tend to:",
+                choices: ["Hesitate and procrastinate", "Act boldly"],
                 weights: [
-                    { investigatorScore: +1, enthusiastScore: 0 },
-                    { enthusiastScore: +1, investigatorScore: 0 }
+                    { loyalistScore: 1, challengerScore: 0 },
+                    { loyalistScore: 0, challengerScore: 1 }
                 ]
             },
             {
-                question: "I handle criticism by:",
-                choices: ["Becoming defensive and justifying myself", "Trying to learn from it and improve"],
+                question: "When it comes to commitments, I:",
+                choices: ["Don't get too involved with others", "Eager to have others depend on me"],
                 weights: [
-                    { loyalistScore: +1, reformerScore: 0 },
-                    { reformerScore: +1, loyalistScore: 0 }
+                    { peacemakerScore: 1, helperScore: 0 },
+                    { peacemakerScore: 0, helperScore: 1 }
                 ]
             },
             {
-                question: "I tend to be:",
-                choices: ["Bold and assertive", "Easy-going and conflict-averse"],
+                question: "When working in emotional situations, I:",
+                choices: ["Set my feelings aside to get the work done", "Need to deal with my feelings first"],
                 weights: [
-                    { challengerScore: +1, peacemakerScore: 0 },
-                    { peacemakerScore: +1, challengerScore: 0 }
-                ]
-            },
-            {
-                question: "I focus on:",
-                choices: ["The big picture and long-term goals", "The details and immediate tasks"],
-                weights: [
-                    { achieverScore: +1, reformerScore: 0 },
-                    { reformerScore: +1, achieverScore: 0 }
-                ]
-            },
-            {
-                question: "In conflict, I:",
-                choices: ["Stand my ground and assert my needs", "Seek to keep the peace"],
-                weights: [
-                    { challengerScore: +1, peacemakerScore: 0 },
-                    { peacemakerScore: +1, challengerScore: 0 }
-                ]
-            },
-            {
-                question: "My strength is:",
-                choices: ["Being logical and insightful", "Being compassionate and nurturing"],
-                weights: [
-                    { investigatorScore: +1, helperScore: 0 },
-                    { helperScore: +1, investigatorScore: 0 }
-                ]
-            },
-            {
-                question: "I prefer:",
-                choices: ["Routine and structure", "Flexibility and new experiences"],
-                weights: [
-                    { loyalistScore: +1, enthusiastScore: 0 },
-                    { enthusiastScore: +1, loyalistScore: 0 }
+                    { achieverScore: 1, individualistScore: 0 },
+                    { achieverScore: 0, individualistScore: 1 }
                 ]
             }
         ];
@@ -155,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentQuestion = questions[currentQuestionIndex];
             const questionElement = document.getElementById('question');
             const choiceContainers = document.getElementById('choices');
-            choiceContainers.innerHTML = ''; 
+            choiceContainers.innerHTML = ''; // Clear previous choices
 
             questionElement.textContent = currentQuestion.question;
             currentQuestion.choices.forEach((choice, index) => {
