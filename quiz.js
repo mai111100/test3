@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         ];
 
+        // Variables for personality scores
         let reformerScore = 0, helperScore = 0, achieverScore = 0, individualistScore = 0;
         let investigatorScore = 0, loyalistScore = 0, enthusiastScore = 0, challengerScore = 0, peacemakerScore = 0;
         let currentQuestionIndex = 0;
@@ -139,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentQuestion = questions[currentQuestionIndex];
             const selectedChoiceWeight = currentQuestion.weights[choiceIndex];
 
+            // Update scores based on the selected choice
             reformerScore += selectedChoiceWeight.reformerScore || 0;
             helperScore += selectedChoiceWeight.helperScore || 0;
             achieverScore += selectedChoiceWeight.achieverScore || 0;
@@ -149,6 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
             challengerScore += selectedChoiceWeight.challengerScore || 0;
             peacemakerScore += selectedChoiceWeight.peacemakerScore || 0;
 
+            // Move to the next question
             currentQuestionIndex++;
             if (currentQuestionIndex < questions.length) {
                 displayCurrentQuestion();
@@ -157,28 +160,43 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Function to calculate and display the Enneagram type and the most compatible types
         function calculateEnneagramType() {
             const results = [
-                { type: "Reformer", score: reformerScore },
-                { type: "Helper", score: helperScore },
-                { type: "Achiever", score: achieverScore },
-                { type: "Individualist", score: individualistScore },
-                { type: "Investigator", score: investigatorScore },
-                { type: "Loyalist", score: loyalistScore },
-                { type: "Enthusiast", score: enthusiastScore },
-                { type: "Challenger", score: challengerScore },
-                { type: "Peacemaker", score: peacemakerScore }
+                { type: "Reformer", score: reformerScore, compatibleWith: ["Enthusiast", "Individualist"], compatibleScores: [enthusiastScore, individualistScore] },
+                { type: "Helper", score: helperScore, compatibleWith: ["Individualist", "Challenger"], compatibleScores: [individualistScore, challengerScore] },
+                { type: "Achiever", score: achieverScore, compatibleWith: ["Loyalist", "Peacemaker"], compatibleScores: [loyalistScore, peacemakerScore] },
+                { type: "Individualist", score: individualistScore, compatibleWith: ["Reformer", "Helper"], compatibleScores: [reformerScore, helperScore] },
+                { type: "Investigator", score: investigatorScore, compatibleWith: ["Enthusiast", "Challenger"], compatibleScores: [enthusiastScore, challengerScore] },
+                { type: "Loyalist", score: loyalistScore, compatibleWith: ["Peacemaker", "Achiever"], compatibleScores: [peacemakerScore, achieverScore] },
+                { type: "Enthusiast", score: enthusiastScore, compatibleWith: ["Reformer", "Investigator"], compatibleScores: [reformerScore, investigatorScore] },
+                { type: "Challenger", score: challengerScore, compatibleWith: ["Investigator", "Helper"], compatibleScores: [investigatorScore, helperScore] },
+                { type: "Peacemaker", score: peacemakerScore, compatibleWith: ["Loyalist", "Achiever"], compatibleScores: [loyalistScore, achieverScore] }
             ];
 
+            // Sort results by highest score to find the dominant type
             results.sort((a, b) => b.score - a.score);
 
             const topType = results[0].type;
+            const compatibleTypes = results[0].compatibleWith;
+            const compatibleScores = results[0].compatibleScores;
+
+            // Sort compatible types based on their scores to determine the most compatible
+            const sortedCompatible = compatibleTypes
+                .map((type, index) => ({ type, score: compatibleScores[index] }))
+                .sort((a, b) => b.score - a.score);
+
+            const mostCompatible = sortedCompatible[0].type;
+            const secondChoice = sortedCompatible[1].type;
+
             const resultElement = document.getElementById('result');
-            resultElement.textContent = `Your dominant Enneagram type is: ${topType}`;
+            resultElement.textContent = `Your dominant Enneagram type is: ${topType}. You are most compatible with: ${mostCompatible}. Second choice: ${secondChoice}.`;
         }
 
+        // Display the first question when the quiz starts
         displayCurrentQuestion();
     }
 
+    // Run the quiz
     displayQuiz();
 });
